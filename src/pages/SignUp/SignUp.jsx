@@ -2,8 +2,6 @@ import Nav from "../Login/Nav";
 import MyTextField from '../../components/MyTextField';
 import MyButton from "../../components/MyButton";
 
-
-
 const SignUp = () => {
   return (
     <>

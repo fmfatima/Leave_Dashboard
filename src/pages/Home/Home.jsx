@@ -1,8 +1,9 @@
 import NavBar from "./NavBar"
 import MyButton from "../../components/MyButton";
-
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <NavBar/>
@@ -19,8 +20,10 @@ const Home = () => {
       </div>
 
       <div className="flex items-center justify-center mt-4">
-        <MyButton sx={{ fontSize: '20px', color: 'white' }}onClick={() => console.log('Clicked')} >
-            Get Started
+         <MyButton
+          sx={{ fontSize: '20px', color: 'white' }}
+          onClick={() => navigate('/login')}>
+          Get Started
         </MyButton>
       </div>
     </>
