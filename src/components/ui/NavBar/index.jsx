@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { GiHamburgerMenu } from "react-icons/gi";
 
+
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 

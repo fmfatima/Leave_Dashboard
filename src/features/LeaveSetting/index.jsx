@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Dashboard from "../Admin/Dashboard";
 import MyButton from "../../components/MyButton";
 import MyTextField from "../../components/MyTextField";
 import { RiDeleteBin5Line } from "react-icons/ri";
@@ -49,10 +48,10 @@ const Leave_Settings = () => {
 
   return (
     <>
-      <Dashboard />
 
       {/* Form */}
-      <div className="w-full max-w-[1020px] flex justify-center items-center p-4 sm:p-6 border border-gray-300 rounded-lg m-4">
+    <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6 border border-gray-300 rounded-lg space-y-4 sm:space-y-0">
+
         <div className="flex flex-col items-center justify-center w-full">
           <h1 className="text-xl sm:text-2xl font-semibold text-[#0FAC81] mb-6">
             Select Leave Range
@@ -94,9 +93,10 @@ const Leave_Settings = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto px-4 sm:px-6 lg:px-4 mt-5">
-        <table className="min-w-[640px] w-full max-w-[1020px] border border-[#ECEEF0] rounded-lg text-sm sm:text-base">
-          <thead className="bg-[#F9FBFC] border-b-2 border-[#ECEEF0]">
+    <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6 border border-gray-300 rounded-lg space-y-4 sm:space-y-0">
+
+          <table className="min-w-[640px] w-full border border-[#ECEEF0] rounded-lg text-sm sm:text-base">
+            <thead className="bg-[#F9FBFC] border-b-2 border-[#ECEEF0]">
             <tr className="text-[#575757] text-[16px] font-semibold">
               <th className="text-left px-4 py-2">Types Of Leave</th>
               <th className="text-left px-4 py-2">No of Leaves</th>

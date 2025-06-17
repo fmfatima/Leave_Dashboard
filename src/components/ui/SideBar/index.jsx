@@ -5,14 +5,17 @@ import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import { IoCalendarOutline } from "react-icons/io5";
+import { FaRegCircleCheck } from "react-icons/fa6";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { IoIosLogOut } from "react-icons/io";
+import { FaClipboardList } from "react-icons/fa";
+
 
 import { useNavigate } from 'react-router-dom';
 
@@ -39,14 +42,14 @@ const closedMixin = (theme) => ({
   },
 });
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'flex-end',
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
+// const DrawerHeader = styled('div')(({ theme }) => ({
+//   display: 'flex',
+//   alignItems: 'center',
+//   justifyContent: 'flex-end',
+//   padding: theme.spacing(0, 1),
+//   // necessary for content to be below app bar
+//   ...theme.mixins.toolbar,
+// }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme }) => ({
@@ -91,7 +94,7 @@ export default function SideBar() {
         </DrawerHeader>
         <Divider /> */}
         <List>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/'))}>
+          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/admin/dashboard'))}>
               <ListItemButton
                 sx={[
                   {
@@ -139,7 +142,7 @@ export default function SideBar() {
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/myleave'))}>
+            <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/admin/leaves'))}>
               <ListItemButton
                 sx={[
                   {
@@ -170,7 +173,7 @@ export default function SideBar() {
                         },
                   ]}
                 >
-                  <InboxIcon />
+                  <FaClipboardList />
                 </ListItemIcon>
                 <ListItemText
                   primary= "My Leaves"
@@ -187,7 +190,7 @@ export default function SideBar() {
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/empdetails'))}>
+            <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/admin/employee/details'))}>
               <ListItemButton
                 sx={[
                   {
@@ -218,7 +221,7 @@ export default function SideBar() {
                         },
                   ]}
                 >
-                  <InboxIcon />
+                  <IoCalendarOutline />
                 </ListItemIcon>
                 <ListItemText
                   primary= "Employee Deatils"
@@ -235,7 +238,7 @@ export default function SideBar() {
               </ListItemButton>
             </ListItem>
 
-            <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/leaveapprove'))}>
+            <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/admin/leaveToApprove'))}>
               <ListItemButton
                 sx={[
                   {
@@ -266,7 +269,7 @@ export default function SideBar() {
                         },
                   ]}
                 >
-                  <InboxIcon />
+                  <FaRegCircleCheck />
                 </ListItemIcon>
                 <ListItemText
                   primary= "Leave To Approve"
@@ -314,7 +317,7 @@ export default function SideBar() {
                         },
                   ]}
                 >
-                  <InboxIcon />
+                  <IoIosLogOut />
                 </ListItemIcon>
                 <ListItemText
                   primary= "Logout"
@@ -362,7 +365,7 @@ export default function SideBar() {
                         },
                   ]}
                 >
-                  <InboxIcon />
+                  <IoArrowBackCircleOutline />
                 </ListItemIcon>
                 <ListItemText
                   primary="Collapse Menu"
