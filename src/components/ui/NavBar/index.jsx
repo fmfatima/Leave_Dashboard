@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { GiHamburgerMenu } from "react-icons/gi";
-
+import { Link } from 'react-router-dom';
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,8 +16,8 @@ const NavBar = () => {
 
             {/* Desktop Links */}
             <div className="hidden sm:flex text-[16px] font-medium text-white items-center space-x-4">
-            <a href="">Login</a>
-            <a href="">Register</a>
+                <Link to="/login">Login</Link>
+                <Link to="/signup">Register</Link>
             </div>
 
             {/* Mobile Toggle + Menu Container */}

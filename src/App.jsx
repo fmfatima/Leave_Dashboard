@@ -16,7 +16,7 @@ import LeaveSettings from './pages/LeaveSettings/LeaveSettings';
 import EmpLeaves from './pages/Employee/EmpLeaves';
 import ResetPassword from './pages/Password/ResetPassword'
 import ForgetPassword from './pages/Password/ForgetPassword'
-import Nav from './pages/Login/Nav';
+import PrivateRoute from './PrivateRoute';
 
 const theme = createTheme({
   palette: {
@@ -28,16 +28,19 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-      {/* <Home /> */}
+      
         <Routes> 
-          <Route path="/" element={<Nav />} />
+          <Route path='/admin/dashboard' element={<PrivateRoute role="admin"><Dashboard /></PrivateRoute>} />
+          <Route path='/employee/dashboard' element={<PrivateRoute role="employee"><Emp_Dashboard /></PrivateRoute>} />
+
+          <Route path="/" element={<SignUp />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
 
-          <Route path='/admin/dashboard' exact element = {<Dashboard/>} />
+          {/* <Route path='/admin/dashboard' exact element = {<Dashboard/>} /> */}
           <Route path='/admin/employee/details' exact element = {<EmployeeDetails/>} />
           <Route path='/admin/leaveToApprove' exact element = {<Leaves_to_Approve/>} />
           <Route path='/admin/leaves' exact element = {<MyLeaves/>} />
@@ -46,7 +49,7 @@ function App() {
           <Route path='/company/new' exact element = {<Create_Company/>} />
           <Route path='/company/status' exact element = {<CompanyStatus/>} />
 
-          <Route path='/employee/dashboard' exact element = {<Emp_Dashboard/>} />
+          {/* <Route path='/employee/dashboard' exact element = {<Emp_Dashboard/>} /> */}
           <Route path='/employee/leavestatus' exact element = {<EmpLeaves/>} />
           <Route path='/applyleaves' exact element = {<LeaveSettings/>} />
 

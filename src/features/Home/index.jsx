@@ -20,7 +20,7 @@ const Homee = () => {
       <div className="flex items-center justify-center mt-4">
          <MyButton
           sx={{ fontSize: '20px', color: 'white' }}
-          onClick={() => navigate('/admin/dashboard')}>
+          onClick={() => navigate('/login')}>
           Get Started
         </MyButton>
       </div>

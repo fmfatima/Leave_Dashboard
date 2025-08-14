@@ -67,214 +67,55 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function EmpSideBar() {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(true);
-
   const navigate = useNavigate();
 
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
+  // Handle Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/home");
+  };
 
+  return (
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
       <Drawer variant="permanent" open={open}>
         <List>
-          <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/employee/dashboard'))}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: 'initial',
-                      }
-                    : {
-                        justifyContent: 'center',
-                      },
-                ]}
-              >
-                <ListItemIcon
-                  sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: 'center',
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: 'auto',
-                        },
-                  ]}
-                >
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText
-                  primary= "Dashboard"
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
+          {/* Dashboard */}
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => navigate("/employee/dashboard")}>
+            <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
+              <ListItemIcon><InboxIcon /></ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItemButton>
+          </ListItem>
 
-            <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/employee/leavestatus'))}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: 'initial',
-                      }
-                    : {
-                        justifyContent: 'center',
-                      },
-                ]}
-              >
-                <ListItemIcon
-                  sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: 'center',
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: 'auto',
-                        },
-                  ]}
-                >
-                  <FaRegCircleCheck />
-                </ListItemIcon>
-                <ListItemText
-                  primary= "Leave Status"
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
+          {/* Leave Status */}
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => navigate("/employee/leavestatus")}>
+            <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
+              <ListItemIcon><FaRegCircleCheck /></ListItemIcon>
+              <ListItemText primary="Leave Status" />
+            </ListItemButton>
+          </ListItem>
 
-            <ListItem disablePadding sx={{ display: 'block' }} onClick={()=> (navigate('/logout'))}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: 'initial',
-                      }
-                    : {
-                        justifyContent: 'center',
-                      },
-                ]}
-              >
-                <ListItemIcon
-                  sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: 'center',
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: 'auto',
-                        },
-                  ]}
-                >
-                  <IoIosLogOut />
-                </ListItemIcon>
-                <ListItemText
-                  primary= "Logout"
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
+          {/* Logout */}
+          <ListItem disablePadding sx={{ display: "block" }} onClick={handleLogout}>
+            <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
+              <ListItemIcon><IoIosLogOut /></ListItemIcon>
+              <ListItemText primary="Logout" />
+            </ListItemButton>
+          </ListItem>
 
-            <ListItem disablePadding sx={{ display: 'block' }} onClick={() => setOpen(!open)}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: 'initial',
-                      }
-                    : {
-                        justifyContent: 'center',
-                      },
-                ]}
-              >
-                <ListItemIcon
-                  sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: 'center',
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: 'auto',
-                        },
-                  ]}
-                >
-                  <IoArrowBackCircleOutline />
-                </ListItemIcon>
-                <ListItemText
-                  primary="Collapse Menu"
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
+          {/* Collapse Menu */}
+          <ListItem disablePadding sx={{ display: "block" }} onClick={() => setOpen(!open)}>
+            <ListItemButton sx={{ minHeight: 48, px: 2.5 }}>
+              <ListItemIcon><IoArrowBackCircleOutline /></ListItemIcon>
+              <ListItemText primary="Collapse Menu" />
+            </ListItemButton>
+          </ListItem>
         </List>
         <Divider />
-        
       </Drawer>
-      
     </Box>
   );
 }
-

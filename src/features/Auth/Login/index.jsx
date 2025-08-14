@@ -1,8 +1,39 @@
 import MyTextField from '../../../components/MyTextField';
 import MyButton from "../../../components/MyButton";
+import api from "../../../api";
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 const LoggedIn = () => {
-  return (
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+        const res = await api.post("/auth/login", { email, password });
+        
+        // Save token to localStorage
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        // Navigate to dashboard based on role
+        console.log("User:", res.data.user);
+            if (res.data.user?.role?.toLowerCase() === "admin") {
+                navigate("/admin/dashboard");
+            } else if (res.data.user?.role?.toLowerCase() === "employee") {
+                navigate("/employee/dashboard");
+            } else {
+                console.error("Unknown role, staying on login page.");
+            }
+        } catch (err) {
+        alert(err.response?.data?.message || "Login failed");
+        }
+    };
+    
+    return (
     <>
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 
                 w-full max-w-[95%] sm:max-w-[90%] md:max-w-[900px] 
@@ -20,14 +51,14 @@ const LoggedIn = () => {
                         </a> or Enter Your Details
                     </p>
                     {/* Login Form */}
-                    <form className="w-full max-w-sm mx-auto p-6 bg-white rounded-lg space-y-4">
+                    <form className="w-full max-w-sm mx-auto p-6 bg-white rounded-lg space-y-4" onSubmit={handleSubmit}>
                         <div className="flex flex-col ml-1">
                             <label htmlFor="email" className="mb-1 text-[14px] font-medium text-black-400">Email</label>
                             <MyTextField
                             type="email"
                             id="email"
                             placeholder="Enter your email"
-                            required
+                            value={email} onChange={(e) => setEmail(e.target.value)} required
                             />
                         </div>
 
@@ -37,7 +68,7 @@ const LoggedIn = () => {
                             type="password"
                             id="password"
                             placeholder="***************"
-                            required
+                            value={password} onChange={(e) => setPassword(e.target.value)} required
                             />
                         </div>
 
@@ -47,7 +78,7 @@ const LoggedIn = () => {
                             <input type="checkbox" className="form-checkbox accent-[#0FAC81]" />
                             <span>Remember me</span>
                             </label>
-                            <a href="#" className="text-[#0FAC81] hover:underline">Forgot password?</a>
+                            <a href="../../forgetpassword" className="text-[#0FAC81] hover:underline">Forgot password?</a>
                         </div>
 
                         <MyButton
@@ -67,7 +98,7 @@ const LoggedIn = () => {
             <img 
                 className="w-full h-full object-cover"
                 src="src/assets/login.png" 
-                alt="signUp" 
+                alt="login" 
             />
             </div>
             

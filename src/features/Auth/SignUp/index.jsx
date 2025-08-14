@@ -1,11 +1,33 @@
 import MyTextField from '../../../components/MyTextField';
 import MyButton from "../../../components/MyButton";
-import { useNavigate } from 'react-router-dom';
+import api from "../../../api";
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
 
 const SignedUp = () => {
-     const navigate = useNavigate(); 
-     
-  return (
+    const navigate = useNavigate(); 
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+        const name = `${firstName} ${lastName}`;
+        const res = await api.post("/auth/signup", { name, email, password });
+        
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        navigate("/home");
+        } catch (err) {
+        alert(err.response?.data?.message || "Signup failed");
+        }
+    };
+    
+    return (
     <>
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 
                 w-full max-w-[95%] sm:max-w-[90%] md:max-w-[900px] 
@@ -18,8 +40,8 @@ const SignedUp = () => {
                 <div className="flex flex-col justify-center items-center mt-5">
                     <h1 className="text-2xl text-black-600 font-bold mt-2 mb-2">Welcome Back, Work Leave</h1>
                     <p className="text-sm">Create A new account with email</p>
-                    {/* Login Form */}
-                    <form className="w-full max-w-sm mx-auto p-6 bg-white rounded-lg space-y-4">
+                    {/* SignUp Form */}
+                    <form className="w-full max-w-sm mx-auto p-6 bg-white rounded-lg space-y-4" onSubmit={handleSubmit}>
                         <div className="flex flex-row space-x-4">
                         {/* First Name */}
                         <div className="flex flex-col w-1/2">
@@ -30,7 +52,7 @@ const SignedUp = () => {
                             type="text"
                             id="firstName"
                             placeholder="First Name"
-                            required
+                            value={firstName} onChange={(e) => setFirstName(e.target.value)} required
                             />
                         </div>
 
@@ -43,7 +65,7 @@ const SignedUp = () => {
                             type="text"
                             id="lastName"
                             placeholder="Last Name"
-                            required
+                            value={lastName} onChange={(e) => setLastName(e.target.value)} required
                             />
                         </div>
                         </div>
@@ -54,7 +76,7 @@ const SignedUp = () => {
                             type="email"
                             id="email"
                             placeholder="Enter your email"
-                            required
+                            value={email} onChange={(e) => setEmail(e.target.value)} required
                             />
                         </div>
 
@@ -64,7 +86,7 @@ const SignedUp = () => {
                             type="password"
                             id="password"
                             placeholder="***************"
-                            required
+                            value={password} onChange={(e) => setPassword(e.target.value)} required
                             />
                         </div>
 
@@ -79,7 +101,7 @@ const SignedUp = () => {
                         <MyButton
                             type="submit"
                             className="!w-[206px] !h-[50px]"
-                            onClick={() => navigate ('/home')} 
+                            // onClick={() => navigate ('/home')} 
                         >
                             Sign Up
                         </MyButton>

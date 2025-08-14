@@ -1,10 +1,12 @@
 import MyTextField from '../../../components/MyTextField';
 import MyButton from "../../../components/MyButton";
 import { BiArrowBack } from "react-icons/bi";
+import { useNavigate } from 'react-router-dom';
 
 
 const ForgetPass = () => {
-  return (
+    const navigate = useNavigate();
+    return (
     <>
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 
                 w-full max-w-[95%] sm:max-w-[90%] md:max-w-[900px] 
@@ -32,12 +34,13 @@ const ForgetPass = () => {
                         <MyButton
                             type="submit"
                             className="!w-[206px] !h-[50px] !mt-8 !bg-[#0FAC81]"
+                            onClick={() => navigate('/resetpassword')}
                         >
                             Reset Password
                         </MyButton>
                         <div className="flex items-center space-x-2 mt-5 text-[18px] font-semibold text-[#0FAC81]">
                             <BiArrowBack className="text-[20px]" />
-                            <a href="#">Back To Login</a>
+                            <a href="../../../Login">Back To Login</a>
                         </div>
                     </form> 
                 </div>
